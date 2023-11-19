@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 1 Tutorial</title>
+    <link rel="stylesheet" href="index.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <script>
+        MathJax.Hub.Config({
+            extensions: ["tex2jax.js"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+            tex2jax: {
+                inlineMath: [['\\(', '\\)']],
+                displayMath: [['\\[', '\\]']],
+                processEscapes: true
+            },
+            "HTML-CSS": { scale: 90 },
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js" integrity="sha512-cOH8ndwGgPo+K7pTvMrqYbmI8u8k6Sho3js0gOqVWTmQMlLIi6TbqGWRTpf1ga8ci9H3iPsvDLr4X7xwhC/+DQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/ScrollTrigger.min.js" integrity="sha512-AMl4wfwAmDM1lsQvVBBRHYENn1FR8cfOTpt8QVbb/P55mYOdahHD4LmHM1W55pNe3j/3od8ELzPf/8eNkkjISQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Observer.min.js" integrity="sha512-7xTD1meeGGoAzwZKA0Z8YelV3qAvRltuwACWXpnxtneF7VAMztOTAi3t4laVSaE4Znq4LMPeGUIYWEvKEk5r3Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Draggable.min.js" integrity="sha512-S6SXKUZ11xkCoD/UuhdXG4B4iiCXng+xW2KCx0lgfQqmdqtjqGgm4WChdYIhO1F/CmH21vnkSUvPEgXNgDwkjg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="index.js" defer></script>
+</head>
+<body>
+    <div class="intro">
+        <h1>An Introduction to Sampling Distributions</h1>
+        <h1>By Arjun</h1>
+    </div>
+
+
+    <div class="math">
+        <h2>Revising Standard Error</h2>
+        <table>
+            <tr>
+                <th>Symbol</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td><strong>\(\sigma\)</strong></td>
+                <td>The population standard deviation</td>
+            </tr>
+            <tr>
+                <td><strong>n</strong></td>
+                <td>The sample size</td>
+            </tr>
+            <tr>
+                <td><strong>μ</strong></td>
+                <td>The population mean</td>
+            </tr>
+            <tr>
+                <td><strong>SE</strong></td>
+                <td>The standard error</td>
+            </tr>
+        </table>
+    
+        <p>The formula for calculating standard error is:</p>
+    
+        <p style="text-align: center;">\[SE = \frac{\sigma}{\sqrt{n}}\]</p>
+    
+        <p>Where:</p>
+        <ul>
+            <li>σ is the population standard deviation</li>
+            <li>n is the sample size</li>
+        </ul>
+        <h2>Standard Error as a Measure of Uncertainty</h2>
+
+    <p>Standard error is a statistical measure that provides a way to quantify the uncertainty or variability in sample data. It is particularly useful in estimating how much the sample mean might vary from the true population mean.</p>
+
+    <table>
+        <tr>
+            <th>Concept</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td><strong>Population</strong></td>
+            <td>The entire group of individuals or instances under consideration.</td>
+        </tr>
+        <tr>
+            <td><strong>Sample</strong></td>
+            <td>A subset of the population used for statistical analysis.</td>
+        </tr>
+        <tr>
+            <td><strong>σ (Population Standard Deviation)</strong></td>
+            <td>The measure of how spread out the values in the population are.</td>
+        </tr>
+        <tr>
+            <td><strong>n (Sample Size)</strong></td>
+            <td>The number of observations in the sample.</td>
+        </tr>
+        <tr>
+            <td><strong>μ (Population Mean)</strong></td>
+            <td>The average of all values in the population.</td>
+        </tr>
+        <tr>
+            <td><strong>SE (Standard Error)</strong></td>
+            <td>A measure of the uncertainty or variability in the sample mean, calculated as \(\frac{\sigma}{\sqrt{n}}\).</td>
+        </tr>
+    </table>
+
+    <p>By understanding the standard error, researchers can assess the precision of their sample mean estimates and make more informed inferences about the population mean.</p>
+
+    <h2>Example Time - </h2>
+    <table class="table" style="font-size: 12pointspx; font-family: Times New Roman; margin-left: auto; margin-right: auto;">
+        <caption style="font-size: initial !important;">
+        <span style="color:black;padding-left:1.32cm;  margin:0px"><strong><b>Table 1</b></strong></span> <br><span style="color:black;padding-left:1.32cm;;margin: 0px"><i></i></span>
+        </caption>
+         <thead>
+          <tr>
+           <th style="text-align:center;text-align: center;border: 1px black; border-style: solid none solid none"> IQ scores </th>
+          </tr>
+         </thead>
+        <tbody>
+          <tr>
+           <td style="text-align:center;"> 109.04 </td>
+          </tr>
+          <tr>
+           <td style="text-align:center;text-align: center;border: 1px black; border-style: none none none none"> 96.69 </td>
+          </tr>
+          <tr>
+           <td style="text-align:center;text-align: center;border: 1px black; border-style: none none none none"> 109.68 </td>
+          </tr>
+          <tr>
+           <td style="text-align:center;text-align: center;border: 1px black; border-style: none none none none"> 128.91 </td>
+          </tr>
+          <tr>
+           <td style="text-align:center;text-align: center;border: 1px black; border-style: none none none none"> 71.55 </td>
+          </tr>
+          <tr>
+           <td style="text-align:center;text-align: center;border: 1px black; border-style: none none none none"> 97.31 </td>
+          </tr>
+          <tr>
+           <td style="text-align:center;text-align: center;border: 1px black; border-style: none none none none"> 94.24 </td>
+          </tr>
+          <tr>
+           <td style="text-align:center;text-align: center;border: 1px black; border-style: none none none none"> 93.33 </td>
+          </tr>
+          <tr>
+           <td style="text-align:center;text-align: center;border: 1px black; border-style: none none none none"> 107.42 </td>
+          </tr>
+          <tr>
+           <td style="text-align:center;text-align: center;border: 1px black; border-style: none none none none"> 109.39 </td>
+          </tr>
+          <tr>
+           <td style="text-align:center;text-align: center;border: 1px black; border-style: none none none none"> 102.85 </td>
+          </tr>
+          <tr>
+           <td style="text-align:center;text-align: center;border: 1px black; border-style: none none none none"> 91.45 </td>
+          </tr>
+          <tr>
+           <td style="text-align:center;text-align: center;border: 1px black; border-style: none none none none"> 116.58 </td>
+          </tr>
+          <tr>
+           <td style="text-align:center;text-align: center;border: 1px black; border-style: none none none none"> 102.85 </td>
+          </tr>
+          <tr>
+           <td style="text-align:center;text-align: center;border: 1px black; border-style: none none none none"> 94.95 </td>
+          </tr>
+          <tr>
+           <td style="text-align:center;text-align: center;border: 1px black; border-style: none none none none"> 78.28 </td>
+          </tr>
+          <tr>
+           <td style="text-align:center;text-align: center;border: 1px black; border-style: none none none none"> 117.40 </td>
+          </tr>
+          <tr>
+           <td style="text-align:center;text-align: center;border: 1px black; border-style: none none none none"> 135.46 </td>
+          </tr>
+          <tr>
+           <td style="text-align:center;text-align: center;border: 1px black; border-style: none none none none"> 86.57 </td>
+          </tr>
+          <tr>
+           <td style="text-align:center;text-align: center;border: 1px black; border-style: none none none nonetext-align: center;border: 1px black; border-style: none none solid none"> 97.59 </td>
+          </tr>
+        </tbody>
+        </table>
+        <div class="image"><img src="img1.jpeg" alt="" style = "width:60%"></div>
+        <div class="image"><img src="img2.jpeg" alt="" style = "width:60%"></div>
+
+    </div>
+
+    <div class="math">
+        <h2>Confidence Intervals</h2>
+
+    <p>Confidence intervals provide a range of values that is likely to include a population parameter with a certain level of confidence. They are commonly used in statistical inference to estimate the precision of sample estimates.</p>
+
+    <table>
+        <tr>
+            <th>Parameter</th>
+            <th>Formula</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td><strong>Population Mean (\(\mu\))</strong></td>
+            <td>\(\bar{x} \pm Z \cdot \frac{\sigma}{\sqrt{n}}\)</td>
+            <td>The confidence interval for the population mean where \(\bar{x}\) is the sample mean, \(Z\) is the Z-score corresponding to the desired confidence level, \(\sigma\) is the population standard deviation, and \(n\) is the sample size.</td>
+        </tr>
+        <tr>
+            <td><strong>Population Proportion (\(p\))</strong></td>
+            <td>\(p \pm Z \cdot \sqrt{\frac{p(1-p)}{n}}\)</td>
+            <td>The confidence interval for the population proportion where \(p\) is the sample proportion, \(Z\) is the Z-score corresponding to the desired confidence level, and \(n\) is the sample size.</td>
+        </tr>
+    </table>
+
+    <p>Note: The Z-score is determined based on the desired confidence level. Common choices include 90%, 95%, and 99% confidence intervals.</p>
+
+    </div>
+
+    <div class="math">
+        <h2>Steps for Calculating Confidence Intervals</h2>
+
+    <p>Confidence intervals provide a range of values that is likely to include a population parameter with a certain level of confidence. Here are the general steps for calculating confidence intervals:</p>
+
+        <p><strong>Determine the Type of Parameter:</strong> Identify whether you are estimating a population mean, proportion, variance, etc.</p> <br>
+        <p style = "color:red"><em>Example:</em> You want to estimate the average height (\(\mu\)) of a population.</p> <br>
+
+        <p><strong>Choose the Confidence Level:</strong> Select the desired confidence level (common choices include 90%, 95%, and 99%).</p> <br>
+        <p style = "color:red"><em>Example:</em> Choose a 95% confidence level (\(Z\)-score of 1.96 for a normal distribution).</p> <br>
+
+        <p><strong>Identify the Sample Statistic:</strong> Gather the necessary information from your sample, such as the sample mean (\(\bar{x}\)), sample proportion (\(p\)), or other relevant statistics.</p><br>
+        <p style = "color:red"><em>Example:</em> Measure the heights of 30 individuals and find the sample mean (\(\bar{x} = 175\) cm).</p> <br>
+
+        <p><strong>Find the Critical Value:</strong> Look up the critical value (Z-score or T-score) corresponding to the chosen confidence level. This depends on the distribution and whether the sample size is large enough to use the normal distribution or requires the t-distribution.</p><br>
+        <p style = "color:red"><em>Example:</em> For a 95% confidence level with a normal distribution, the critical Z-score is 1.96.</p> <br>
+
+        <p><strong>Calculate the Margin of Error:</strong> Use the formula for the margin of error based on the chosen critical value and the standard error of the sample statistic.</p><br>
+        <p style = "color:red"><em>Example:</em> If the standard deviation (\(\sigma\)) is known, the margin of error (\(E\)) for the mean is calculated as \(E = Z \cdot \frac{\sigma}{\sqrt{n}}\).</p> <br>
+
+        <p><strong>Compute the Confidence Interval:</strong> Combine the sample statistic and the margin of error to calculate the lower and upper bounds of the confidence interval.</p><br>
+        <p style = "color:red"><em>Example:</em> The confidence interval is \((\bar{x} - E, \bar{x} + E)\).</p>
+
+    <p>Repeat these steps for different types of parameters, adjusting the formulas accordingly (e.g., for means, proportions, etc.).</p>
+
+    </div>
+
+    <div class="math"><h2>Standard Error and Confidence Interval Formulas</h2>
+
+        <table>
+            <tr>
+                <th>Parameter</th>
+                <th>Formula</th>
+            </tr>
+            <tr>
+                <td><strong>Standard Error (SE) for Mean</strong></td>
+                <td>\(SE = \frac{\sigma}{\sqrt{n}}\)</td>
+            </tr>
+            <tr>
+                <td><strong>Confidence Interval (CI) for Mean</strong></td>
+                <td>\(\bar{x} \pm t \cdot SE\)</td>
+            </tr>
+            <tr>
+                <td><strong>Confidence Interval (CI) for Proportion</strong></td>
+                <td>\(p \pm t \cdot \sqrt{\frac{p(1-p)}{n}}\)</td>
+            </tr>
+        </table>
+    
+        <p>Where:</p>
+        <ul>
+            <li>\(\bar{x}\) is the sample mean.</li>
+            <li>\(p\) is the sample proportion.</li>
+            <li>\(\sigma\) is the population standard deviation.</li>
+            <li>\(n\) is the sample size.</li>
+            <li>\(t\) is the critical value corresponding to the desired confidence level.</li>
+        </ul>
+    </div>
+
+    <div class="math">
+        <h2>Introduction to t-Distribution</h2>
+
+    <p>The t-distribution, also known as the Student's t-distribution, is a probability distribution that arises in the estimation of population parameters when the sample size is small and the population standard deviation is unknown.</p>
+
+    <p>Key characteristics of the t-distribution:</p>
+
+    <ul>
+        <li>It is symmetric and bell-shaped, similar to the standard normal distribution.</li>
+        <li>It is defined by its degrees of freedom, denoted by \(df\).</li>
+        <li>As the degrees of freedom increase, the t-distribution approaches the standard normal distribution.</li>
+        <li>It has fatter tails compared to the normal distribution, making it more robust for small sample sizes.</li>
+    </ul>
+
+    <p>The probability density function (PDF) of the t-distribution is given by:</p>
+
+    <p style="text-align: center;">\[f(t; df) = \frac{\Gamma\left(\frac{df + 1}{2}\right)}{\sqrt{df \pi} \, \Gamma\left(\frac{df}{2}\right)} \left(1 + \frac{t^2}{df}\right)^{-\frac{df + 1}{2}}\]</p>
+
+    <p>Where:</p>
+
+    <ul>
+        <li>\(t\) is a random variable following the t-distribution.</li>
+        <li>\(df\) is the degrees of freedom.</li>
+        <li>\(\Gamma\) is the gamma function.</li>
+    </ul>
+
+    <p>The t-distribution is commonly used in hypothesis testing and constructing confidence intervals when dealing with small sample sizes or unknown population standard deviations.</p>
+    <div class="image"><img src="https://www.jmp.com/en_no/statistics-knowledge-portal/t-test/t-distribution/_jcr_content/par/styledcontainer_2069_1940499363/par/image.img.png/1580489179006.png" style = "width:60%" alt=""></div>
+    <div class="image"><img src="https://static.wixstatic.com/media/e89071_7fbe4efefaa543f4ac1a349978a30e4b~mv2.png/v1/fill/w_700,h_399,al_c,lg_1,q_85/e89071_7fbe4efefaa543f4ac1a349978a30e4b~mv2.png" style = "width:60%;margin-top:10px;" alt=""></div>
+
+    <h2>t-Distribution vs Normal Distribution</h2>
+
+    <table>
+        <tr>
+            <th>Characteristics</th>
+            <th>t-Distribution</th>
+            <th>Normal Distribution</th>
+        </tr>
+        <tr>
+            <td><strong>Symmetry</strong></td>
+            <td>Symmetric and bell-shaped.</td>
+            <td>Symmetric and bell-shaped.</td>
+        </tr>
+        <tr>
+            <td><strong>Tails</strong></td>
+            <td>Fatter tails compared to the normal distribution.</td>
+            <td>Thinner tails.</td>
+        </tr>
+        <tr>
+            <td><strong>Shape</strong></td>
+            <td>Depends on degrees of freedom (\(df\)). As \(df\) increases, t-distribution approaches normal distribution.</td>
+            <td>Fixed shape regardless of sample size.</td>
+        </tr>
+        <tr>
+            <td><strong>Use Case</strong></td>
+            <td>Commonly used for small sample sizes when the population standard deviation is unknown.</td>
+            <td>Used for larger sample sizes or when the population standard deviation is known.</td>
+        </tr>
+        <tr>
+            <td><strong>Degrees of Freedom (\(df\))</strong></td>
+            <td>Controls the shape of the distribution. As \(df\) increases, the t-distribution approaches the normal distribution.</td>
+            <td>Not applicable.</td>
+        </tr>
+    </table>
+
+    <p>The t-distribution approximates a normal distribution under the condition that the sample size is sufficiently large. As \(df\) increases, the t-distribution becomes closer to the standard normal distribution.</p>
+
+    </div>
+
+    <div class="math">
+        <h2>MCQs on t-Distributions vs. z-Distributions</h2>
+
+    <ul>
+        <li>
+            <p><strong>When comparing the t-distribution to the z-distribution, which of the following statements is correct?</strong></p>
+            <ul>
+                <li>A. The t-distribution is always symmetric, while the z-distribution may not be symmetric.</li>
+                <li>B. The z-distribution has fatter tails compared to the t-distribution.</li>
+                <li>C. The t-distribution has fixed tails regardless of the sample size.</li>
+                <li>D. The z-distribution becomes narrower as the degrees of freedom increase.</li>
+            </ul>
+            <p><strong>Answer:</strong> A. The t-distribution is always symmetric, while the z-distribution may not be symmetric.</p>
+        </li>
+
+        <li>
+            <p><strong>In the context of hypothesis testing, when is it more appropriate to use a t-distribution instead of a z-distribution?</strong></p>
+            <ul>
+                <li>A. When the sample size is small.</li>
+                <li>B. When the population standard deviation is known.</li>
+                <li>C. When constructing a confidence interval.</li>
+                <li>D. When the null hypothesis is true.</li>
+            </ul>
+            <p><strong>Answer:</strong> A. When the sample size is small.</p>
+        </li>
+
+        <li>
+            <p><strong>Which of the following statements is true regarding the tails of the t-distribution and z-distribution?</strong></p>
+            <ul>
+                <li>A. The t-distribution has thinner tails compared to the z-distribution.</li>
+                <li>B. Both distributions have equal tail thickness.</li>
+                <li>C. The t-distribution has fatter tails compared to the z-distribution.</li>
+                <li>D. The z-distribution has fixed tails regardless of the degrees of freedom.</li>
+            </ul>
+            <p><strong>Answer:</strong> C. The t-distribution has fatter tails compared to the z-distribution.</p>
+        </li>
+
+        <li>
+            <p><strong>The degrees of freedom (\(df\)) in a t-distribution:</strong></p>
+            <ul>
+                <li>A. Increase the thickness of the tails.</li>
+                <li>B. Have no effect on the shape of the distribution.</li>
+                <li>C. Decrease the variability of the distribution.</li>
+                <li>D. Control the shape of the distribution.</li>
+            </ul>
+            <p><strong>Answer:</strong> D. Control the shape of the distribution.</p>
+        </li>
+
+        <li>
+            <p><strong>In a scenario where the sample size is large (approaching infinity), the t-distribution:</strong></p>
+            <ul>
+                <li>A. Becomes narrower.</li>
+                <li>B. Approaches the standard normal distribution.</li>
+                <li>C. Develops fatter tails.</li>
+                <li>D. Remains unaffected.</li>
+            </ul>
+            <p><strong>Answer:</strong> B. Approaches the standard normal distribution.</p>
+        </li>
+    </ul>
+    </div>
+
+    <div class="math">
+        <h2>Practice Problems: Confidence Intervals</h2>
+
+    <p>Solve the following problems related to confidence intervals:</p>
+
+    <ul>
+        <li>
+            <p><strong style = "color:red">Problem:</strong> A random sample of 50 students is selected to estimate the average hours of study per week. The sample mean is 15 hours, and the population standard deviation is 3 hours. Calculate a 95% confidence interval for the true mean hours of study.</p>
+        </li>
+
+        <li>
+            <p><strong style = "color:red">Problem:</strong> A researcher wants to estimate the proportion of adults who own a smartphone. They survey 500 adults, and 300 of them own smartphones. Calculate a 99% confidence interval for the true proportion of adults who own smartphones.</p>
+        </li>
+
+        <li>
+            <p><strong style = "color:red">Problem:</strong> An environmental study measures the pollution levels in a river at two different locations. The sample sizes are 30 and 40, with standard deviations of 2 and 3, respectively. Calculate a 90% confidence interval for the difference in mean pollution levels between the two locations.</p>
+        </li>
+
+        <li>
+            <p><strong style = "color:red">Problem:</strong> A nutritionist wants to estimate the average calorie intake for a specific population. They take a sample of 25 individuals and find a sample mean of 2000 calories with a sample standard deviation of 400 calories. Calculate a 99% confidence interval for the true mean calorie intake.</p>
+        </li>
+
+        <li>
+            <p><strong style = "color:red">Problem:</strong> A company wants to estimate the average satisfaction rating of its customers. They survey 100 customers, and the sample mean satisfaction rating is 4.2 with a sample standard deviation of 0.8. Calculate a 95% confidence interval for the true mean satisfaction rating.</p>
+        </li>
+    </ul>
+
+    </div>
+
+    <div class="math">
+        <h2>Solution 1</h2>
+        <p>Given data:</p>
+    <ul>
+        <li>Sample mean (\(\bar{x}\)) = 15 hours</li>
+        <li>Population standard deviation (\(\sigma\)) = 3 hours</li>
+        <li>Sample size (\(n\)) = 50</li>
+        <li>Confidence level = 95%</li>
+    </ul>
+
+    <p>The formula for the confidence interval for the mean (\(\mu\)) is given by:</p>
+
+    <p style="text-align: center;">\[ \text{Confidence Interval} = \bar{x} \pm Z \cdot \frac{\sigma}{\sqrt{n}} \]</p>
+
+    <p>Where:</p>
+    <ul>
+        <li>\(\bar{x}\) is the sample mean.</li>
+        <li>\(Z\) is the Z-score corresponding to the desired confidence level.</li>
+        <li>\(\sigma\) is the population standard deviation.</li>
+        <li>\(n\) is the sample size.</li>
+    </ul>
+
+    <p>First, we need to find the Z-score for a 95% confidence level. The Z-score can be obtained from standard normal distribution tables or using statistical software, and for a 95% confidence level, \(Z \approx 1.96\).</p>
+
+    <p>Now, plug in the values into the formula:</p>
+
+    <p style="text-align: center;">\[ \text{Confidence Interval} = 15 \pm 1.96 \cdot \frac{3}{\sqrt{50}} \]</p>
+
+    <p>Calculating the standard error (\(\frac{\sigma}{\sqrt{n}}\)):</p>
+
+    <p style="text-align: center;">\[ \text{Standard Error} = \frac{3}{\sqrt{50}} \approx 0.4243 \]</p>
+
+    <p>Now, substitute the values into the confidence interval formula:</p>
+
+    <p style="text-align: center;">\[ \text{Confidence Interval} = 15 \pm 1.96 \cdot 0.4243 \]</p>
+
+    <p>Calculating the upper and lower bounds:</p>
+
+    <p style="text-align: center;">\[ \text{Lower Bound} \approx 14.16 \]</p>
+    <p style="text-align: center;">\[ \text{Upper Bound} \approx 15.84 \]</p>
+
+    <p>Therefore, the 95% confidence interval for the true mean hours of study is approximately \(14.16\) to \(15.84\) hours.</p>
+    <h2>Solution 2</h2>
+    <p>Given data:</p>
+    <ul>
+        <li>Number of successes (\(x\)) = 300</li>
+        <li>Sample size (\(n\)) = 500</li>
+        <li>Confidence level = 99%</li>
+    </ul>
+
+    <p>The formula for the confidence interval for the proportion (\(p\)) is given by:</p>
+
+    <p style="text-align: center;">\[ \text{Confidence Interval} = p \pm Z \cdot \sqrt{\frac{p(1-p)}{n}} \]</p>
+
+    <p>Where:</p>
+    <ul>
+        <li>\(p\) is the sample proportion (\(\frac{x}{n}\)).</li>
+        <li>\(Z\) is the Z-score corresponding to the desired confidence level.</li>
+        <li>\(n\) is the sample size.</li>
+    </ul>
+
+    <p>First, calculate the sample proportion (\(p\)):</p>
+
+    <p style="text-align: center;">\[ p = \frac{x}{n} = \frac{300}{500} = 0.6 \]</p>
+
+    <p>Next, we need to find the Z-score for a 99% confidence level. The Z-score can be obtained from standard normal distribution tables or using statistical software, and for a 99% confidence level, \(Z \approx 2.576\).</p>
+
+    <p>Now, plug in the values into the confidence interval formula:</p>
+
+    <p style="text-align: center;">\[ \text{Confidence Interval} = 0.6 \pm 2.576 \cdot \sqrt{\frac{0.6(1-0.6)}{500}} \]</p>
+
+    <p>Calculating the standard error (\(\sqrt{\frac{p(1-p)}{n}}\)):</p>
+
+    <p style="text-align: center;">\[ \text{Standard Error} = \sqrt{\frac{0.6(1-0.6)}{500}} \approx 0.0315 \]</p>
+
+    <p>Now, substitute the values into the confidence interval formula:</p>
+
+    <p style="text-align: center;">\[ \text{Confidence Interval} = 0.6 \pm 2.576 \cdot 0.0315 \]</p>
+
+    <p>Calculating the upper and lower bounds:</p>
+
+    <p style="text-align: center;">\[ \text{Lower Bound} \approx 0.536 \]</p>
+    <p style="text-align: center;">\[ \text{Upper Bound} \approx 0.664 \]</p>
+
+    <p>Therefore, the 99% confidence interval for the true proportion of adults who own smartphones is approximately \(0.536\) to \(0.664\).</p>
+    <h2>Solution 3</h2>
+    <p>Given data:</p>
+    <ul>
+        <li>Sample size (\(n_1\)) = 30</li>
+        <li>Sample size (\(n_2\)) = 40</li>
+        <li>Standard deviation (\(\sigma_1\)) = 2</li>
+        <li>Standard deviation (\(\sigma_2\)) = 3</li>
+        <li>Confidence level = 90%</li>
+    </ul>
+
+    <p>The formula for the confidence interval for the difference in means (\(\mu_1 - \mu_2\)) is given by:</p>
+
+    <p style="text-align: center;">\[ \text{Confidence Interval} = (\bar{x}_1 - \bar{x}_2) \pm t \cdot \sqrt{\frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}} \]</p>
+
+    <p>Where:</p>
+
+    <ul>
+        <li>\(\bar{x}_1\) is the sample mean of the first sample.</li>
+        <li>\(\bar{x}_2\) is the sample mean of the second sample.</li>
+        <li>\(\sigma_1\) is the standard deviation of the first sample.</li>
+        <li>\(\sigma_2\) is the standard deviation of the second sample.</li>
+        <li>\(n_1\) is the sample size of the first sample.</li>
+        <li>\(n_2\) is the sample size of the second sample.</li>
+        <li>\(t\) is the critical value corresponding to the desired confidence level.</li>
+    </ul>
+
+    <p>Given data:</p>
+    <ul>
+        <li>Sample size (\(n_1\)) = 30</li>
+        <li>Sample size (\(n_2\)) = 40</li>
+        <li>Standard deviation (\(s_1\)) = 2</li>
+        <li>Standard deviation (\(s_2\)) = 3</li>
+        <li>Confidence level = 90%</li>
+    </ul>
+
+    <p>The formula for the confidence interval for the difference in means (\(\mu_1 - \mu_2\)) is given by:</p>
+
+    <p style="text-align: center;">\[ \text{Confidence Interval} = (\bar{x}_1 - \bar{x}_2) \pm Z \cdot \sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}} \]</p>
+
+    <p>Where:</p>
+    <ul>
+        <li>\(\bar{x}_1\) and \(\bar{x}_2\) are the sample means.</li>
+        <li>\(Z\) is the Z-score corresponding to the desired confidence level.</li>
+        <li>\(s_1\) and \(s_2\) are the standard deviations.</li>
+        <li>\(n_1\) and \(n_2\) are the sample sizes.</li>
+    </ul>
+
+    <p>Now, plug in the values into the formula. Assume \(Z \approx 1.645\) for a 90% confidence level:</p>
+
+    <p style="text-align: center;">\[ \text{Confidence Interval} = (\bar{x}_1 - \bar{x}_2) \pm 1.645 \cdot \sqrt{\frac{2^2}{30} + \frac{3^2}{40}} \]</p>
+
+    <p>Calculating the standard error (\(\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}\)):</p>
+
+    <p style="text-align: center;">\[ \text{Standard Error} \approx \sqrt{\frac{2^2}{30} + \frac{3^2}{40}} \approx 0.633 \]</p>
+
+    <p>Now, substitute the values into the confidence interval formula:</p>
+
+    <p style="text-align: center;">\[ \text{Confidence Interval} = (\bar{x}_1 - \bar{x}_2) \pm 1.645 \cdot 0.633 \]</p>
+
+    <p>Calculating the upper and lower bounds:</p>
+
+    <p style="text-align: center;">\[ \text{Lower Bound} \approx -1.228 \]</p>
+    <p style="text-align: center;">\[ \text{Upper Bound} \approx 2.728 \]</p>
+
+    <p>Therefore, the 90% confidence interval for the difference in mean pollution levels is approximately \(-1.228\) to \(2.728\).</p>
+
+    <h2>Solution 4</h2>
+    <p><strong>Problem:</strong> A nutritionist wants to estimate the average calorie intake for a specific population. They take a sample of 25 individuals and find a sample mean of 2000 calories with a sample standard deviation of 400 calories. Calculate a 99% confidence interval for the true mean calorie intake.</p>
+
+    <p><strong>Solution:</strong></p>
+
+    <p>Given data:</p>
+    <ul>
+        <li>Sample mean (\(\bar{x}\)) = 2000 calories</li>
+        <li>Sample standard deviation (\(s\)) = 400 calories</li>
+        <li>Sample size (\(n\)) = 25</li>
+        <li>Confidence level = 99%</li>
+    </ul>
+
+    <p>The formula for the confidence interval for the mean (\(\mu\)) is given by:</p>
+
+    <p style="text-align: center;">\[ \text{Confidence Interval} = \bar{x} \pm Z \cdot \frac{s}{\sqrt{n}} \]</p>
+
+    <p>Where:</p>
+    <ul>
+        <li>\(\bar{x}\) is the sample mean.</li>
+        <li>\(Z\) is the Z-score corresponding to the desired confidence level.</li>
+        <li>\(s\) is the sample standard deviation.</li>
+        <li>\(n\) is the sample size.</li>
+    </ul>
+
+    <p>Now, plug in the values into the formula. Assume \(Z \approx 2.576\) for a 99% confidence level:</p>
+
+    <p style="text-align: center;">\[ \text{Confidence Interval} = 2000 \pm 2.576 \cdot \frac{400}{\sqrt{25}} \]</p>
+
+    <p>Calculating the standard error (\(\frac{s}{\sqrt{n}}\)):</p>
+
+    <p style="text-align: center;">\[ \text{Standard Error} = \frac{400}{\sqrt{25}} = 80 \]</p>
+
+    <p>Now, substitute the values into the confidence interval formula:</p>
+
+    <p style="text-align: center;">\[ \text{Confidence Interval} = 2000 \pm 2.576 \cdot 80 \]</p>
+
+    <p>Calculating the upper and lower bounds:</p>
+
+    <p style="text-align: center;">\[ \text{Lower Bound} \approx 1830.4 \]</p>
+    <p style="text-align: center;">\[ \text{Upper Bound} \approx 2169.6 \]</p>
+
+    <p>Therefore, the 99% confidence interval for the true mean calorie intake is approximately \(1830.4\) to \(2169.6\) calories.</p>
+
+    <h2>Solution 5</h2>
+
+    <p><strong>Problem:</strong> A company wants to estimate the average satisfaction rating of its customers. They survey 100 customers, and the sample mean satisfaction rating is 4.2 with a sample standard deviation of 0.8. Calculate a 95% confidence interval for the true mean satisfaction rating.</p>
+
+    <p><strong>Solution:</strong></p>
+
+    <p>Given data:</p>
+    <ul>
+        <li>Sample mean (\(\bar{x}\)) = 4.2</li>
+        <li>Sample standard deviation (\(s\)) = 0.8</li>
+        <li>Sample size (\(n\)) = 100</li>
+        <li>Confidence level = 95%</li>
+    </ul>
+
+    <p>The formula for the confidence interval for the mean (\(\mu\)) is given by:</p>
+
+    <p style="text-align: center;">\[ \text{Confidence Interval} = \bar{x} \pm Z \cdot \frac{s}{\sqrt{n}} \]</p>
+
+    <p>Now, plug in the values into the formula. Assume \(Z \approx 1.96\) for a 95% confidence level:</p>
+
+    <p style="text-align: center;">\[ \text{Confidence Interval} = 4.2 \pm 1.96 \cdot \frac{0.8}{\sqrt{100}} \]</p>
+
+    <p>Calculating the standard error (\(\frac{s}{\sqrt{n}}\)):</p>
+
+    <p style="text-align: center;">\[ \text{Standard Error} = \frac{0.8}{\sqrt{100}} = 0.08 \]</p>
+
+    <p>Now, substitute the values into the confidence interval formula:</p>
+
+    <p style="text-align: center;">\[ \text{Confidence Interval} = 4.2 \pm 1.96 \cdot 0.08 \]</p>
+
+    <p>Calculating the upper and lower bounds:</p>
+
+    <p style="text-align: center;">\[ \text{Lower Bound} \approx 4.05 \]</p>
+    <p style="text-align: center;">\[ \text{Upper Bound} \approx 4.35 \]</p>
+
+    <p>Therefore, the 95% confidence interval for the true mean satisfaction rating is approximately \(4.05\) to \(4.35\).</p>
+
+
+
+    </div>
+</body>
+</html>
